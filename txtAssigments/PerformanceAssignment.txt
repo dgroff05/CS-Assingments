@@ -1,0 +1,268 @@
+Title  : Performance Assignment
+Class  : CSCI 370.f25
+Name(s):  Dylan Groff
+Date   : 9/21/25
+
+******************************************************************************
+
+Consider three different processors P1, P2, and P3 executing the same
+instruction set with the clock rates and CPIs given below.
+
+Processor    Clock Rate      CPI
+P1	     2.0 GHz           1.5
+P2	     1.5 GHz	     1.0
+P3	     3.0 GHz	     2.5
+
+1.1) Which processor has the highest performance in instructions per
+second (I/s)? Hint: You can solve the main performance equation for IC
+/ T to get the required units.
+
+T_1 = IC_1 * CPI_1 / f_1  ->  IC_1 / T_1 = f_1 / CPI_1  ->  
+IC_1 / T_1 = 2.0 GHz / 1.5 CPI  ->  IC_1 / T_1 = 2.0e9 c/s / 1.5 CPI  ->  
+IC_1 / T_1 = (2.0e9 c / s) * (I / 1.5 c)  ->  IC_1 / T_1 = 2.0e9 I / 1.5 s  ->
+IC_1 / T_1 = 1.333e9 I/s
+
+T_2 = IC_2 * CPI_2 / f_2  ->  IC_2 / T_2 = f_2 / CPI_2  ->  
+IC_2 / T_2 = 1.5 GHz / 1.0 CPI  ->  IC_2 / T_2 = 1.5e9 c/s / 1.5 CPI  ->
+IC_2 / T_2 = (1.5e9 c / s) * (I / 1.5 c)  ->  IC_2 / T_2 = 1.5e9 I / 1.5 s  ->
+IC_2 / T_2 = 1e9 I/s
+
+T_3 = IC_3 * CPI_3 / f_3  ->  IC_3 / T_3 = f_3 / CPI_3  ->  
+IC_3 / T_3 = 3.0 GHz / 2.5 CPI  ->  IC_3 / T_3 = 3.0e9 c/s / 2.5 CPI  ->  
+IC_3 / T_3 = (3.oe9 c / s) * (I / 2.5 c)  ->  IC_3 / T_3 = 3.0e9 I / 2.5 s  ->
+IC_3 / T_3 = 1.2e9 I/s
+
+### Processor 1 has the highest performance in I/s ###
+
+1.2) If the processors each execute a program in 10 seconds, find the
+number of cycles and the number of instructions for each processor. 
+T_1, T_2, T_3 = 10 s
+
+IC_1 / T_1 = 1.333e9 I/s  ->  IC_1 = 1.333e9 I/s * T_1  ->  
+IC_1 = 1.333e9 I/s * 10 s  ->  ### IC_1 = 1.333e10 I ###
+CC_1 = IC_1 * CPI_1  ->  CC_1 = 1.333e10 I * 1.5 CPI  ->  ### CC_1 = 2e10 c ###
+
+IC_2 / T_2 = 1e9 I/s  -> IC_2 = 1e9 I/s * T_2  ->  IC_2 = 1e9 I/s * 10 s  ->  
+### IC_2 = 1e10 I ###
+CC_2 = IC_2 * CPI_2  -> CC_2 = 1e10 I * 1.0 CPI  ->  ### CC_2 = 1e10 c ###
+
+IC_3 / T_3 = 1.2e9 I/s  ->  IC_3 = 1.2e9 I/s * T_3  ->  
+IC_3 = 1.2e9 I/s * 10 s ->  ### IC_3 = 1.2e10 I ###
+CC_3 = IC_3 * CPI_3  ->  CC_3 = 1.2e10 I * 2.5 CPI  ->  ### CC_3 = 3e10 c ###
+
+1.3) We are trying to reduce the time (from 10 s in Problem 1.2) by
+30% but this leads to an increase of 20% in the CPI. What clock rate
+should we have to get this time reduction for each processor?
+
+T_1 = T_2 = T_3         T_1,2,3 = 10 - .3(10) = 7 s
+
+new CPI_1 = 1.5 * 1.2 = 1.8 CPI
+IC_1 / T_1 = 1.333e9 I/s  ->  IC_1 = 1.333e9 I * T_1  ->  
+IC_1 = 1.333e9 I/s * 7 s  ->  IC_1 = 9.331e9 I
+T_1 = IC_1 * CPI_1 / f_1  ->  f_1 = IC_1 * CPI_1 / T_1  ->  
+f_1 = 9.331e9 I * 1.8 CPI / 7 s  ->  f_1 = 1.680e10 c / 7 s  ->  
+f_1 = 2.399e9 c/s  ->  ### f_1 = 2.399 GHz ###
+
+new CPI_2 = 1.0 * 1.2 = 1.2 CPI
+IC_2 / T_2 = 1e9 I/s  ->  IC_2 = 1e9 I/s * T_2  ->  IC_2 = 1e9 I/s * 7s  ->  
+IC_2 = 7e9 I
+T_2 = IC_2 * CPI_2 / f_2  ->  f_2 = IC_2 * CPI_2 / T_2  ->  
+f_2 = 7e9 I * 1.2 CPI / 7 s  ->  f_2 = 8.4e9 c / 7 s  ->  f_2 = 1.2e9 c/s  ->
+### f_2 = 1.2 GHz ###
+
+new CPI_3 = 2.5 * 1.2 = 3 CPI
+IC_3 / T_3 = 1.2e9 I/s  ->  IC_3 = 1.2e9 I/s * T_3  ->  IC_3 1.2e9 * 7 s  ->  
+IC_3 = 8.4e9 I 
+T_3 = IC_3 * CPI_3 / f_3  ->  f_3 = IC_3 * CPI_3 / T_3  ->  
+f_3 = 8.4e9 I * 3 CPI / 7 s  ->  f_3 = 2.52e10 I / 7 s  ->  f_3 = 3.6e9 c/s ->
+### f_3 = 3.6 GHz ###
+
+
+For the problems below, use the information in the following table.
+
+Processor    Clock Rate    No. Instructions    Time
+P1	     2.0 GHz	   20e9		       7  s
+P2	     1.5 GHz	   30e9		       10 s
+P3	     3.0 GHz	   90e9		       9  s
+
+1.4) Find the IPC for each processor.
+
+T_1 = IC_1 * CPI_1 / f_1   ->  1 / CPI_1 = IC_1 / (f_1 * T_1)  ->  
+1 / CPI_1 = 20e9 I / (2.0e9 c/s * 7 s)  ->
+1 / CPI_1 = 20e9 I / 1.4e10 c  ->  ### 1 / CPI_1 = 1.429 IPC ###
+
+T_2 = IC_2 * CPI_2 / f_2   ->  1 / CPI_2 = IC_2 / (f_2 * T_2)  ->  
+1 / CPI_2 = 30e9 I / (1.5e9 c/s * 10 s)  ->
+1 / CPI_2 = 30e9 I / 1.5e10 c  ->  ### 1 / CPI_2 = 2 IPC ###
+
+T_3 = IC_3 * CPI_3 / f_3   ->  1 / CPI_3 = IC_3 / (f_3 * T_3)  ->  
+1 / CPI_3 = 90e9 I / (3e9 c/s * 9 s)  ->
+1 / CPI_3 = 90e9 I / 2.7e10 c  ->  ### 1 / CPI_3 = 3.333 IPC ###
+
+
+1.5) Find the clock rate for P2 that reduces its execution time to
+that of P1.
+
+T_2 = T_1
+1 / CPI_2 = 2 IPC  ->  CPI_2 = 1/2 CPI
+T_2 = IC_2 * CPI_2 / f_2  ->  f_2 = IC_2 * CPI_2 / T_1  ->  
+f_2 = 30e9 I * 1/2 CPI / 7 s  -> f_2 = 1.5e9 c / 7 s  ->  
+f_2 = 2.142857143e9 c/s  ->  ### f_2 = 2.143 GHz ###
+
+
+1.6) Find the number of instructions for P2 that reduces it execution
+time to that of P3.
+
+T_2 = T_3
+1 / CPI_2 = 2 IPC  ->  CPI_2 = 1/2 CPI
+T_2 = IC_2 * CPI_2 / f_2  ->  IC_2 = T_3 * f_2 / CPI_2  ->  
+IC_2 = 9 s * 1.5e9 c/s / (1/2) CPI  ->  IC_2 = 1.35e10 c / (1 c / 2 I)  ->  
+### IC_2 = 2.7e10 I ###
+
+
+******************************************************************************
+
+Consider two different implementations (P1 and P2) of the same
+ISA. There are four classes of instructions: A, B, C, and D. The clock
+rate and CPI of each implementation are given in the following table.
+
+      Clock Rate | CPI Class A | CPI Class B | CPI Class C | CPI Class D
+P1    1.5 GHz      1             2             3             4
+P2    2.0 GHz      2     	   2	           2 	       2
+
+2.1) Suppose we have a program with 10^6 instructions divided into
+classes as follows: 10% class A, 20% class B, 50% class C, and 20%
+class D. Which implementation is faster?
+
+IC_A = 10^6 * .10 = 1e5 I
+IC_B = 10^6 * .20 = 2e5 I
+IC_C = 10^6 * .50 = 5e5 I
+IC_D = 10^6 * .20 = 2e5 I
+
+CC_1 = summation from i=1 to n of (CPI_i * IC_i)  -> 
+CC_1 = (1 CPI * 1e5 I) + (2 CPI * 2e5 I) + (3 CPI * 5e5 I) + (4 CPI * 2e5 I) ->
+CC_1 = 2.8e6 c
+T_1 = CC_1 / f_1  ->  T_1 = 2.8e6 c / 1.5e9 c/s  ->  1.867e-3 s
+
+CC_2 = summation from i=1 to n of (CPI_i * IC_i)
+CC_2 = (2 CPI * 1e5 I) + (2 CPI * 2e5 I) + (2 CPI * 5e5 I) + (2 CPI * 2e5 I) ->
+CC_2 = 2e6 c
+T_2 = CC_2 / f_2  ->  T_2 = 2e6 c / 2e9 c/s  ->  1e-3 s
+
+### P2 implementation is the fastest ###
+
+2.2) What is the average CPI for each implementation?
+
+CC_1 = 2.8e6 c
+CPI_1 = CC_1 / IC_1  ->  CPI_1 = 2.8e6 c / 10^6 I  ->  ### CPI_1 = 2.8 CPI ###
+
+CC_2 = 2e6 c
+CPI_2 = CC_2 / IC_2  ->  CPI_2 = 2e6 c / 10^6 I   -> ### CPI_2 = 2 CPI ###
+
+
+2.3) Find the clock cycles required in both cases.
+
+CC_1 = summation from i=1 to n of (CPI_i * IC_i)  -> 
+CC_1 = (1 CPI * 1e5 I) + (2 CPI * 2e5 I) + (3 CPI * 5e5 I) + (4 CPI * 2e5 I) ->
+### CC_1 = 2.8e6 c ###
+
+CC_2 = summation from i=1 to n of (CPI_i * IC_i)  ->
+CC_2 = (2 CPI * 1e5 I) + (2 CPI * 2e5 I) + (2 CPI * 5e5 I) + (2 CPI * 2e5 I) ->
+### CC_2 = 2e6 c ###
+
+
+The following table shows the number of instructions for a program.
+
+Arith    Store    Load    Branch   Total
+500	      50	  100	      50	   700
+
+2.4) Assuming that Arith instructions take 1 cycle, Load and Store 5
+cyles, and Branch 2 cycles, what is the execution time of the program
+on a 2 GHz processor?
+
+CC = summation from i=1 to n of (CPI_i * IC_i)  ->
+CC = (1 CPI * 500 I) + (5 CPI * 50 I) + (5 CPI * 100 I) + (2 CPI * 50 I)  ->
+CC = 1.35e3 c
+T = CC / f  ->  T = 1.35e3 c / 2e9 c/s  -> ### 6.75e-7 s ###
+
+
+2.5) Find the CPI for the program.
+
+CC = 1.35e3 c     IC = 700
+CC = CPI * IC  ->  CPI = CC / IC  ->  ### CPI = 1.929 CPI ###
+
+
+2.6) If the number of load instructions can be reduced by one-half,
+what is the speed-up and the CPI?
+
+CC_new = summation from i=1 to n of (CPI_i * IC_i)  ->
+CC_new = (1 CPI * 500 I) + (5 CPI * 50 I) + (5 CPI * 50 I) + (2 CPI * 50 I)  ->
+CC_new = 1.1e3 c
+T_new = CC_new / f  ->  T_new = 1.1e3 c / 2e9 c/s  ->  T_new = 5.5e-7 s
+
+Speedup = CC / CC_new  ->  speedup = 6.75e-7 / 5.5e-7  ->  speedup = 1.227  ->
+### speedup = 22.7% ### 
+
+IC_new = 700 - .5(load instructions) = 650 I
+CPI_new = CC_new / IC_new  ->  CPI_new = 1.1e3 c / 650 I  ->
+### CPI_new = 1.692 CPI ###
+
+******************************************************************************
+
+Suppose we have developed new versions of a processor with the
+following characteristics.
+
+Version    Voltage    Clock Rate
+A	   5.0 V      0.5 GHz
+B	   3.3 V      1.0 GHz
+
+3.1) Determine the ratio of capacative loads (L_B / L_A) if the power
+has been reduced by 10%?
+
+P_B = P_A
+
+P_B / P_A = (L_B * V_B^2 * f_B) / (L_A * V_A^2 * f_A)  -> 
+ L_B / L_A = (.9P_B * V_A^2 * f_A) / (.9P_A * V_B^2 * f_B)  ->
+L_B / L_A = (.9P_A W * 5.0^2 V * 0.5 GHz) / (P_A W * 3.3^2 V * 1.0 GHz)  ->  
+L_B / L_A = (.9 * 12.5) / 10.89  ->  L_B / L_A = 11.25 / 10.89  ->  
+### L_B / L_A = 1.033 ###
+
+
+3.2) Determine the power ratio if the capacitive load does not change.
+(Find the ratio P_B / P_A.)
+
+L_A = L_B
+
+P_B / P_A = (L_B * V_B^2 * f_B) / (L_A * V_A^2 * f_A)  ->  
+P_B / P_A = (L_A * 5.0^2 V * 0.5 GHz) / (L_A * 3.3^2 V * 1.0 GHz)  ->
+P_B / P_A = (25 * 0.5) / (10.89 * 1.0)  ->  P_B / P_A = 12.5 / 10.89  ->
+### P_B / P_A = 1.148 ###
+
+
+3.3) Assuming that the capacitive load of B is 80% the load of A,
+find the voltage for B if the power of B is 60% that of A.
+
+P_B = P_A   L_B = L_A
+
+P_A / P_B = (L_A * V_A^2 * f_A) / (L_B * V_B^2 * f_B)  ->  
+V_B^2 = (L_A * V_A^2 * f_A * P_B) / (L_B * f_B * P_A)  ->
+V_B^2 = (L_A * 5.0^2 V * 0.5 GHz * .60P_A) / (.80L_A * 1.0 GHz * P_A)  ->
+V_B^2 = (25 V * 0.5 * .60) / (.80 * 1.0)  ->  V_B^2 = 7.5 V / .8  ->
+V_B^2 = 9.375 V  ->  V_B = sqrt (9.375) V  ->  ### V_B = 3.062 V ###
+
+
+Supposing the industry trends show that a new process generation
+scales as below.
+
+Capacitive Load    Voltage    Clock Rate    Area
+1	   	       2^(1/4)    2^(1/2)	  2^(-1/2)
+
+3.4) By what factor does the power scale?
+
+P = L * V^2 * f  ->  P = (L * A) * V^2 * f  ->  
+P = (1 * 2^(-1/2)) * (2^(1/4))^2 * 2^(1/2)  ->  P = 2^(-1/2) * 2  ->
+P = 1.414  ->  ### Power scales by a factor of 1.414 ###
+
+
+
+******************************************************************************

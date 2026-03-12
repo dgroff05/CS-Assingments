@@ -1,0 +1,49 @@
+1. 
+
+Location   Contents           Comment             
+--------   --------           -------             
+0          1                  Constant        
+1          100                Constant         
+2          99                 J
+3L         LOAD M(399)        AC <-- A[J]        
+3R         SUB M(499)         AC <-- A[J] - B[J] 
+4L         STOR M(599)        Write C[J]       
+4R         LOAD M(2)          AC <-- J                 
+5L         SUB M(0)           AC <-- J - 1    
+5R         JUMP+M(6,20:39)    Branch to 6R if AC >= 0 
+6L         HALT               Terminate program
+6R         STOR M(2)          J <-- AC
+7L         LOAD M(1)          AC <-- 100
+7R         ADD M(1)           AC <-- 100 + 100
+8L         ADD M(1)           AC <-- 200 + 100
+8R         ADD M(2)           AC <-- 300 + J
+9L         STOR M(3,0:19)     Updates address in 3L instruction to AC
+9R         ADD M(1)           AC <-- 300 + J + 100
+10L        STOR M(3,20:39)    Updates address in 3R instruction to AC
+10R        ADD M(1)           AC <-- 400 + J + 100
+11L        STOR M(4,0:19)     Updates address in 4L instruction to AC
+11R        JUMP M(3,0:19)     Jumps to 3L
+
+2. A CPU reads from memory by first placing the starting instruction address in
+   the program counter (PC). It will always start on the left. Next the
+   instruction fetch cycle starts. The address is stored in the MAR. MAR stands
+   for memory address register and its job is to hold the address of the next
+   read/write. The MAR then transfers it to the MBR. The MBR is the memory
+   buffer register and it temporarily holds the word read from memory. Once the
+   address is in the MBR, it takes the right half instruction of the word and
+   stores it in the input buffer (IBR). The IBR just holds onto it until it is
+   ready to be used. The left instruction is placed in the instruction register
+   (IR) and the memory address in the instruction is placed into the MAR. Now
+   the data fetch cycle begins. The address in the MAR is used to fetch the
+   data at its location and store it in the MBR. From here the execution cycle
+   can start. The IR executes the instruction by using the data loaded into the
+   MBR. Finally, the PC is toggled to the right. The same concept is done with
+   the right instruction except the IBR transfers the instruction to the IR
+   instead of the MBR transferring it. The same cycle will repeat. At the end,
+   the PC is updated to the location of the next instruction where it will
+   begin the whole cycle again.
+
+3. The address modification instructions are crucial because it allows us to
+   actually have a concise working loop. Without it we would have to do this
+   iteratively which will get very costly. This instruction allows us to reuse
+   instructions and save memory. Less memory means it will be cheaper to run.

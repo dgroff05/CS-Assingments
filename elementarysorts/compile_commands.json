@@ -1,0 +1,15 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++23",
+      "-o",
+      "driver",
+      "driver.cpp"
+    ],
+    "directory": ".",
+    "file": "./driver.cpp",
+    "output": "./driver"
+  }
+]

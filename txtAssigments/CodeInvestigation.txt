@@ -1,0 +1,35 @@
+  i. The task I chose was maze solving. 
+     URL: https://rosettacode.org/wiki/Maze_solving
+
+ ii. All of the languages I saw that completed this were 11l, Action!, Ada, 
+     AutoHotkey, BBC BASIC, C, C#, C++, Clojure, D, Delphi, EasyLang, EGL,
+     Emacs Lisp, Erlang, FreeBASIC, Frege, Go, Haskell, Icon and Unicon, J, 
+     Java, JavaScript, Julia, Kotlin, Mathematica /Wolfram Language, Nim, Perl,
+     Phix, Picat, PicoLisp, Prolog, PureBasic, Python, Racket, Raku, Red, Ruby,
+     Rust, Swift, Tcl, Uiua, Wren, and zkl.
+
+iii. The language I liked the most was Kotlin. The readibility is very similar
+     to languages I've seen which also helps the writability. I felt like it 
+     was easier to understand than some other languages. It also introduced 
+     cool things like no semi-colons and to be able to use multiple cases in
+     one if statement rather than doing several else ifs.
+
+ iv. I did not like zkl at all. The readibility and writibility is not very
+     good. It is difficult to tell what was happening. For some of the syntax,
+     it was hard to tell if something was a pair or two variables seperated by
+     a comma. I can't imagine code like this is reliable when it's hard to read
+     and write like this.
+
+  v. I think Python is actually the best option to implement this task. It 
+     has very good readibility and writability. It is easy to understand how
+     the task is completed and understand it. If you already know Dijkstra's 
+     method then it is very easy to replicate. It is pretty cool that with 
+     this language you can actually implement Dijkstra's without having to 
+     jump through a bunch of extra hoops like in C++ for example.
+
+ vi. I think the worst choice for this task might be C++. The readibility and
+     writibility get really complex and it is very hard to tell what is going
+     on throughout the program. C++ also does not easily allow something like 
+     a BFS, DFS, or Dijkstra's to be easily implemented to complete this task.
+     Although C++ can run very fast, I don't think the tradeoffis worth it. I'd
+     rather go with something simpler to implement and replicate.
