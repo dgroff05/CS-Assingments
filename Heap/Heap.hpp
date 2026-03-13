@@ -23,7 +23,6 @@
 
 /************************************************************/
 // Using declarations
-using std::vector;
 
 /************************************************************/
 
@@ -32,6 +31,8 @@ class Heap
 {
 public:
     // Using statements
+    using iterator = typename vector<T>::iterator;
+    using const_iterator = typename vector<T>::const_iterator;
 
     // Default constructor
     Heap ()
@@ -40,13 +41,13 @@ public:
     {}
 
     // Custom comparator constructor
-    explicitly Heap (const Compare& comparator)
+    explicit Heap (const Compare& comparator)
         : heap (), 
         comp (comparator)
     {}
 
     // Heapify constructor; takes a vector and heapifies it (basically heap sort)
-    Heap (const vector<t> elements, const Compare& cmp = Compare())
+    Heap (const vector<T>& elements, const Compare& cmp = Compare())
         : heap (elements), 
         comp (cmp)
     {
@@ -69,14 +70,14 @@ public:
 
     // returns the size of the heap
     size_t
-    size ()
+    size () const
     {
         return heap.size ();
     }
 
     // returns if the heap is empty
     bool
-    empty ()
+    empty () const
     {
         return size () == 0;
     }
@@ -92,7 +93,7 @@ public:
     iterator
     begin ()
     {
-        return heap.begin ()
+        return heap.begin ();
     }
 
     // const version of begin ()
@@ -118,7 +119,7 @@ public:
 
     // Adds value to the heap
     void
-    push (T& value)
+    push (const T& value)
     {
         heap.push_back (value);
         upHeap (size () - 1);
@@ -136,15 +137,19 @@ public:
     void
     pop ()
     {
+        if (heap.empty())
+            throw std::exception ("Heap is empty");
         heap.front () = heap.back ();
         heap.pop_back ();
-        heap.downHeap (0);
+        downHeap (0);
     }
 
     // Returns the top element
-    T
-    top ()
+    const T&
+    top () const
     {
+        if (heap.empty())
+            throw std::exception ("Heap is empty");
         return heap.front ();
     }
 
@@ -165,7 +170,7 @@ private:
             else break;
         }
         // Find where to place it
-        heap[] = val;
+        heap[i] = val;
     }
 
     // Up heap method; Moves element up the heap until it is in the right position
@@ -175,8 +180,8 @@ private:
         T item = heap[pos];
 
         size_t i;
-        for (i = pos; i != 0 && comp (item, v[p(i)]); i = p(i))
-            heap[i] = v[p(i)];
+        for (i = pos; i != 0 && comp (item, heap[parent(i)]); i = p(i))
+            heap[i] = heap[parent(i)];
 
         heap[i] = item;
     }
@@ -199,10 +204,10 @@ private:
     size_t
     parent (size_t pos)
     {
-        return (pos - 1) / 2
+        return (pos - 1) / 2;
     }
 
-    vector<T> heap;
+    std::vector<T> heap;
     Compare comp;
 
 };
